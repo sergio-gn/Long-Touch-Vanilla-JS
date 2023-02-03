@@ -1,0 +1,60 @@
+
+<style>
+.subcard img {
+    width: 100%;
+}
+.img-wrapper {
+    overflow: hidden;
+}
+.test{
+    transition: 0.9s ease;
+    transform: scale(1.10);
+}
+.test2{
+    transition: 0.9s ease;
+    transform: scale(1.0);
+}
+</style>
+<div class="card">
+  <div class="subcard" >
+      <div class="img-wrapper">
+          <img id="area" class="inner-img" src="https://i.pinimg.com/originals/3b/41/1f/3b411f90dd76f8614e2ee9686dff5787.jpg">
+      </div>
+  </div>
+</div>
+
+<script>
+let onlongtouch = false;
+let timer = false;
+let duration = 800;
+
+function touchStart(){
+  if (!timer) {
+    timer = setTimeout(onlongtouch, duration);
+  }
+}
+
+function touchEnd(){
+  if (timer) {
+    clearTimeout(timer);
+    timer = false;
+    onreleasetouch();
+  }
+}
+
+onlongtouch = function(){
+  document.querySelector("#area").classList.add("test");
+  document.querySelector("#area").classList.remove("test2");
+}
+
+function onreleasetouch(){
+  document.querySelector("#area").classList.add("test2");
+  document.querySelector("#area").classList.remove("test");
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+  document.querySelector("#area").addEventListener("touchstart", touchStart);
+  document.querySelector("#area").addEventListener("touchend", touchEnd);
+});
+</script>
+
